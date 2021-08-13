@@ -5,22 +5,22 @@ import siteMetadata from '@/data/siteMetadata'
 import { getAllTags } from '@/lib/tags'
 import kebabCase from '@/lib/utils/kebabCase'
 
-import { useTranslation } from 'next-translate'
+import useTranslation from 'next-translate/useTranslation'
 
 export async function getStaticProps({ defaultLocale, locale, locales }) {
   const otherLocale = locale !== defaultLocale ? locale : ''
   const tags = await getAllTags('blog', otherLocale)
 
-  return { props: { tags, availableLocales: locales } }
+  return { props: { tags, locale, availableLocales: locales } }
 }
 
-export default function Tags({ tags, availableLocales }) {
+export default function Tags({ tags, locale, availableLocales }) {
   const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
   const { t } = useTranslation()
   return (
     <>
       <PageSEO
-        title={`${t('headerNavLinks:tags')} - ${siteMetadata.author}`}
+        title={`${t('headerNavLink:tags')} - ${siteMetadata.author}`}
         description={t('SEO:tags')}
         availableLocales={availableLocales}
       />

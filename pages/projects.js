@@ -13,7 +13,7 @@ export default function Projects({ locale, availableLocales }) {
   return (
     <>
       <PageSEO
-        title={`${'headerNavLinks:projects'} - ${siteMetadata.author}`}
+        title={`${t('headerNavLinks:projects')} - ${siteMetadata.author}`}
         description={siteMetadata.description[locale]}
         availableLocales={availableLocales}
       />
