@@ -5,7 +5,7 @@ import ListLayout from '@/layouts/ListLayout'
 import { POSTS_PER_PAGE } from '../../blog'
 
 import useTranslation from 'next-translate/useTranslation'
-import { createPortal } from 'react-dom'
+
 export async function getStaticPaths({ locales, defaultLocale }) {
   const paths = (
     await Promise.all(
@@ -83,15 +83,11 @@ export default function PostPage({
   const { t } = useTranslation()
   return (
     <>
-<<<<<<< HEAD
-      <PageSeo
+      <PageSEO
         title={siteMetadata.title[locale]}
         description={siteMetadata.description[locale]}
         availableLocales={availableLocales}
       />
-=======
-      <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
->>>>>>> master
       <ListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}

@@ -78,15 +78,6 @@ const CommonSEO = ({ title, description, ogType, ogImage, twImage, availableLoca
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={twImage} />
-      <link
-        key={router.locale}
-        rel="alternate"
-        type="application/rss+xml"
-        title={`${description} - RSS feed`}
-        href={`${siteMetadata.siteUrl}${router.asPath}/feed${
-          router.locale === router.defaultLocale ? '' : `.${router.locale}`
-        }.xml`}
-      />
       {availableLocales && generateLinks(router, availableLocales)}
     </Head>
   )
@@ -133,10 +124,13 @@ export const TagSEO = ({ title, description, availableLocales }) => {
       />
       <Head>
         <link
+          key={router.locale}
           rel="alternate"
           type="application/rss+xml"
           title={`${description} - RSS feed`}
-          href={`${siteMetadata.siteUrl}${router.asPath}/feed.xml`}
+          href={`${siteMetadata.siteUrl}${router.asPath}/feed${
+            router.locale === router.defaultLocale ? '' : `.${router.locale}`
+          }.xml`}
         />
       </Head>
     </>

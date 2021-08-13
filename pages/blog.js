@@ -25,15 +25,11 @@ export default function Blog({ posts, initialDisplayPosts, pagination, locale, a
   const { t } = useTranslation()
   return (
     <>
-<<<<<<< HEAD
-      <PageSeo
+      <PageSEO
         title={`Blog - ${siteMetadata.author}`}
         description={siteMetadata.description[locale]}
         availableLocales={availableLocales}
       />
-=======
-      <PageSEO title={`Blog - ${siteMetadata.author}`} description={siteMetadata.description} />
->>>>>>> master
       <ListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}

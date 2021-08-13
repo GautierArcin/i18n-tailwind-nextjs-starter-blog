@@ -1,12 +1,8 @@
 import siteMetadata from '@/data/siteMetadata'
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
-<<<<<<< HEAD
-import { PageSeo } from '@/components/SEO'
-import useTranslation from 'next-translate/useTranslation'
-=======
 import { PageSEO } from '@/components/SEO'
->>>>>>> master
+import useTranslation from 'next-translate/useTranslation'
 
 export async function getStaticProps({ locale, locales }) {
   return { props: { locale, availableLocales: locales } }
@@ -16,15 +12,11 @@ export default function Projects({ locale, availableLocales }) {
   const { t } = useTranslation()
   return (
     <>
-<<<<<<< HEAD
-      <PageSeo
-        title={`Projects - ${siteMetadata.author}`}
+      <PageSEO
+        title={`${'headerNavLinks:projects'} - ${siteMetadata.author}`}
         description={siteMetadata.description[locale]}
         availableLocales={availableLocales}
       />
-=======
-      <PageSEO title={`Projects - ${siteMetadata.author}`} description={siteMetadata.description} />
->>>>>>> master
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">

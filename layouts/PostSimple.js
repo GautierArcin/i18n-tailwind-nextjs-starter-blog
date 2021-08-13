@@ -22,15 +22,11 @@ export default function PostLayout({
 
   return (
     <SectionContainer>
-<<<<<<< HEAD
-      <BlogSeo
+      <BlogSEO
         availableLocales={availableLocales}
         url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`}
         {...frontMatter}
       />
-=======
-      <BlogSEO url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`} {...frontMatter} />
->>>>>>> master
       <article>
         <div>
           <header>
