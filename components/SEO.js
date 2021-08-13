@@ -23,47 +23,51 @@ const generateLinks = (router, availableLocales) =>
     />
   ))
 
-export const PageSeo = ({ title, description, availableLocales }) => {
-  const router = useRouter()
-  return (
-    <Head>
-      <title>{`${title}`}</title>
-      <meta name="robots" content="follow, index" />
-      <meta name="description" content={description} />
-      <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={siteMetadata.title[router.locale]} />
-      <meta property="og:description" content={description} />
-      <meta property="og:title" content={title} />
-      <meta property="og:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
-      <meta property="og:locale" content={router.locale} />
-      {availableLocales &&
-        availableLocales
-          .filter((locale) => locale !== router.locale)
-          .map((locale) => <meta key={locale} property="og:locale:alternate" content={locale} />)}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={siteMetadata.twitter} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
-      {availableLocales && generateLinks(router, availableLocales)}
-    </Head>
-  )
-}
+// export const PageSeo = ({ title, description, availableLocales }) => {
+//   const router = useRouter()
+//   return (
+//     <Head>
+//       <title>{`${title}`}</title>
+//       <meta name="robots" content="follow, index" />
+//       <meta name="description" content={description} />
+//       <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
+//       <meta property="og:type" content="website" />
+//       <meta property="og:site_name" content={siteMetadata.title[router.locale]} />
+//       <meta property="og:description" content={description} />
+//       <meta property="og:title" content={title} />
+//       <meta property="og:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
+//       <meta property="og:locale" content={router.locale} />
+//       {availableLocales &&
+//         availableLocales
+//           .filter((locale) => locale !== router.locale)
+//           .map((locale) => <meta key={locale} property="og:locale:alternate" content={locale} />)}
+//       <meta name="twitter:card" content="summary_large_image" />
+//       <meta name="twitter:site" content={siteMetadata.twitter} />
+//       <meta name="twitter:title" content={title} />
+//       <meta name="twitter:description" content={description} />
+//       <meta name="twitter:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
+//       {availableLocales && generateLinks(router, availableLocales)}
+//     </Head>
+//   )
+// }
 
-export const TagSeo = ({ title, description, availableLocales }) => {
+const CommonSEO = ({ title, description, ogType, ogImage, twImage, availableLocales }) => {
   const router = useRouter()
   return (
     <Head>
-      <title>{`${title}`}</title>
+      <title>{title}</title>
       <meta name="robots" content="follow, index" />
       <meta name="description" content={description} />
       <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteMetadata.title[router.locale]} />
       <meta property="og:description" content={description} />
       <meta property="og:title" content={title} />
-      <meta property="og:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
+      {ogImage.constructor.name === 'Array' ? (
+        ogImage.map(({ url }) => <meta property="og:image" content={url} key={url} />)
+      ) : (
+        <meta property="og:image" content={ogImage} key={ogImage} />
+      )}
       <meta property="og:locale" content={router.locale} />
       {availableLocales &&
         availableLocales
@@ -73,7 +77,7 @@ export const TagSeo = ({ title, description, availableLocales }) => {
       <meta name="twitter:site" content={siteMetadata.twitter} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
+      <meta name="twitter:image" content={twImage} />
       <link
         key={router.locale}
         rel="alternate"
@@ -88,7 +92,58 @@ export const TagSeo = ({ title, description, availableLocales }) => {
   )
 }
 
-export const BlogSeo = ({
+// export const BlogSeo = ({
+//   authorDetails,
+//   title,
+//   summary,
+//   date,
+//   lastmod,
+//   url,
+//   availableLocales,
+//   images = [],
+// }) => {
+export const PageSEO = ({ title, description, availableLocales }) => {
+  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType="website"
+      ogImage={ogImageUrl}
+      twImage={twImageUrl}
+      availableLocales={availableLocales}
+    />
+  )
+}
+
+export const TagSEO = ({ title, description, availableLocales }) => {
+  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const router = useRouter()
+  return (
+    <>
+      <CommonSEO
+        title={title}
+        description={description}
+        ogType="website"
+        ogImage={ogImageUrl}
+        twImage={twImageUrl}
+        availableLocales={availableLocales}
+      />
+      <Head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${description} - RSS feed`}
+          href={`${siteMetadata.siteUrl}${router.asPath}/feed.xml`}
+        />
+      </Head>
+    </>
+  )
+}
+
+export const BlogSEO = ({
   authorDetails,
   title,
   summary,
@@ -153,10 +208,20 @@ export const BlogSeo = ({
     description: summary,
   }
 
+  const twImageUrl = featuredImages[0].url
+
   return (
     <>
+      <CommonSEO
+        title={title}
+        description={summary}
+        ogType="article"
+        ogImage={featuredImages}
+        twImage={twImageUrl}
+        availableLocales={availableLocales}
+      />
       <Head>
-        <title>{`${title}`}</title>
+        {/* <title>{`${title}`}</title>
         <meta name="robots" content="follow, index" />
         <meta name="description" content={summary} />
         <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
@@ -176,13 +241,15 @@ export const BlogSeo = ({
         <meta name="twitter:site" content={siteMetadata.twitter} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={summary} />
-        <meta name="twitter:image" content={featuredImages[0].url} />
+        <meta name="twitter:image" content={featuredImages[0].url} /> */}
         {date && <meta property="article:published_time" content={publishedAt} />}
         {lastmod && <meta property="article:modified_time" content={modifiedAt} />}
         {availableLocales && generateLinks(router, availableLocales)}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData, null, 2) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData, null, 2),
+          }}
         />
       </Head>
     </>

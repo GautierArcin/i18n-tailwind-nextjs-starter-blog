@@ -1,7 +1,7 @@
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
-import { BlogSeo } from '@/components/SEO'
+import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import formatDate from '@/lib/utils/formatDate'
 import Comments from '@/components/comments'
@@ -22,11 +22,15 @@ export default function PostLayout({
 
   return (
     <SectionContainer>
+<<<<<<< HEAD
       <BlogSeo
         availableLocales={availableLocales}
         url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`}
         {...frontMatter}
       />
+=======
+      <BlogSEO url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`} {...frontMatter} />
+>>>>>>> master
       <article>
         <div>
           <header>

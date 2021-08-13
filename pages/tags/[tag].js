@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { TagSeo } from '@/components/SEO'
+=======
+import { TagSEO } from '@/components/SEO'
+>>>>>>> master
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
 import generateRss from '@/lib/generate-rss'
@@ -63,10 +67,16 @@ export default function Tag({ posts, tag, locale, availableLocales }) {
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   return (
     <>
+<<<<<<< HEAD
       <TagSeo
         title={`${tag} - ${siteMetadata.title[locale]}`}
         description={`${tag} tags - ${siteMetadata.title[locale]}`}
         availableLocales={availableLocales}
+=======
+      <TagSEO
+        title={`${tag} - ${siteMetadata.author}`}
+        description={`${tag} tags - ${siteMetadata.author}`}
+>>>>>>> master
       />
       <ListLayout posts={posts} title={title} />
     </>
