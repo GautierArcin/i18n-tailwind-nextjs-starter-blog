@@ -60,7 +60,7 @@ const LayoutWrapper = ({ children }) => {
               className="text-gray-900 dark:text-gray-100 text-shadow-sm text-sm bg-transparent tracking-wide"
             >
               {locales.map((e) => (
-                <option className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100" value={e} key={e}>
+                <option className="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100" value={e} key={e}>
                   {e}
                 </option>
               ))}
